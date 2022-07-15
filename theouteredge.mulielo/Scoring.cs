@@ -39,7 +39,7 @@ namespace theouteredge.mulielo
         
         public static IEnumerable<double> Exponential(int n, double _base)
         {
-            var output = Enumerable.Range(1, n).Select(p => (double)Math.Pow(_base, (n - (float)p) - 1));
+            var output = Enumerable.Range(1, n).Select(p => (double)Math.Pow(_base, (n - (double)p) - 1));
             var sum = output.Sum();
 
             return output; // / sum;

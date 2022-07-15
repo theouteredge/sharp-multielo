@@ -20,7 +20,7 @@ namespace theouteredge.mulielo.test
         [SetUp]
         public void Setup()
         {
-            
+        
         }
 
         [Test]
@@ -31,15 +31,16 @@ namespace theouteredge.mulielo.test
                 var scoringMethod = Scoring.Create(1);
                 var scores = scoringMethod(n);
 
-                Assert.That(scores.Sum(), Is.EqualTo(1), 
+                Assert.That(scores.Sum(), Is.EqualTo(1).Within(0.000000000000001), 
                     () => $"liner scoring algorithm does not sum to 1 for n={n}: {format(scores)}");
                 
                 Assert.That(scores.Min(), Is.EqualTo(0), 
                     () => $"linear score function does not have minimum score of 0 for n={n}: {format(scores)}");
 
                 var diff = difference(scores);
-                Assert.That(diff.All((a) => a == diff.First()), Is.True, 
-                    () => $"linear score function is not monotonically decreasing for n={n}: {format(diff)}");
+                for (var i = 0; i < diff.Count() -1; i++)
+                    Assert.That(diff[i] - diff[i+1], Is.EqualTo(0).Within(0.000000000000001), 
+                        () => $"linear score function is not monotonically decreasing for n={n}: out by {diff[i] - diff[i+1]} {format(diff)}");
 
                 return n;
             }).ToList();
