@@ -2,6 +2,8 @@ namespace theouteredge.mulielo.test
 {
     public class ScoringFunctionsTests
     {
+        Func<IEnumerable<double>, string> format = (scores) => $"[{string.Join(',', scores)}]";
+
         Func<IEnumerable<double>, List<double>> difference = (scores) =>
         {
             var result = new List<double>();
@@ -13,8 +15,6 @@ namespace theouteredge.mulielo.test
 
             return result;
         };
-
-        Func<IEnumerable<double>, string> format = (scores) => $"[{string.Join(',', scores)}]";
 
 
         [SetUp]
@@ -47,17 +47,5 @@ namespace theouteredge.mulielo.test
 
             Assert.Pass();
         }
-
-        /*
-         * www => <= == 
-        for n in range(3, 11):
-        scores = linear_score_function(n)
-        score_diffs = np.diff(scores)
-        assert np.allclose(scores.sum(), 1), f"linear score function does not sum to 1 for n={n}: {scores}"
-        assert np.allclose(scores.min(), 0), \
-            f"linear score function does not have minimum score of 0 for n={n}: {scores}"
-        assert np.all(score_diffs< 0), \
-            f"linear score function is not monotonically decreasing for n={n}: {scores}"
-        */
     }
 }
